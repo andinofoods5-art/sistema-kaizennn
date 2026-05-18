@@ -27,7 +27,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    const sections = ["hero", "valor", "vision", "catalogo", "opportunity"];
+    const sections = ["hero", "valor", "vision", "planes", "catalogo", "opportunity"];
     const observerOptions = {
       root: null,
       rootMargin: "-40% 0px -40% 0px",
@@ -65,6 +65,7 @@ export default function App() {
     { id: "hero", label: "Inicio" },
     { id: "valor", label: "Valor" },
     { id: "vision", label: "Vision" },
+    { id: "planes", label: "Planes" },
     { id: "catalogo", label: "Catalogo" },
   ];
 
@@ -150,19 +151,29 @@ export default function App() {
               Has llegado a la cúspide de <span className="text-white font-tech uppercase tracking-widest">Sistema Kaizen</span>. No es formación, es el traspaso de un legado intelectual valorado en más de <span className="text-gold font-bold">quinientos mil dólares</span> en activos exclusivos.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-8 items-center">
+            <div className="flex flex-col sm:flex-row gap-6 items-center">
               <a 
                 href="https://catalogoskaizen.my.canva.site/hm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center gap-3 bg-gold text-black px-12 py-5 font-bold uppercase tracking-[0.2em] hover:bg-gold-light transition-all overflow-hidden text-sm shadow-[0_0_30px_rgba(212,175,55,0.3)]"
+                className="group relative flex items-center justify-center gap-3 bg-gold text-black px-10 py-5 font-bold uppercase tracking-[0.2em] hover:bg-gold-light transition-all overflow-hidden text-sm shadow-[0_0_30px_rgba(212,175,55,0.3)] w-full sm:w-auto"
               >
                 <span className="relative z-10">Ver Catálogo</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform relative z-10" />
                 <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
               </a>
+
+              <a 
+                href="https://kaizen-tau-coral.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-center gap-3 border border-gold/50 text-gold px-10 py-5 font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-black transition-all text-sm w-full sm:w-auto"
+              >
+                <span>Ver Planes y Precios</span>
+                <Gem className="w-4 h-4" />
+              </a>
               
-              <div className="flex items-center gap-4 text-white/40 font-tech uppercase text-[10px] tracking-widest border-l border-white/10 pl-8">
+              <div className="hidden lg:flex items-center gap-4 text-white/40 font-tech uppercase text-[10px] tracking-widest border-l border-white/10 pl-8">
                 <ShieldCheck className="w-6 h-6 text-gold/50" />
                 <span>Validado por expertos del sector</span>
               </div>
@@ -277,6 +288,83 @@ export default function App() {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Planes y Precios Section */}
+      <section id="planes" className="py-32 border-t border-white/5 bg-gradient-to-b from-black to-gold/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="font-display text-5xl md:text-7xl mb-6">Planes del <span className="text-gold italic">Sistema Kaizen</span></h2>
+            <p className="text-white/40 uppercase tracking-[0.4em] text-[10px]">Selecciona tu nivel de entrada al conocimiento elite</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {[
+              {
+                tier: "Mensual",
+                price: "$147",
+                period: "/mes",
+                desc: "Acceso total a la bóveda de conocimientos durante 30 días.",
+                features: ["Todo el Catálogo", "IA & E-commerce", "Soporte Standard", "Actualizaciones Mensuales"],
+                cta: "Comenzar Ahora",
+                highlight: false
+              },
+              {
+                tier: "Anual",
+                price: "$997",
+                period: "/año",
+                desc: "El camino del visionario. Ahorra más del 40% con acceso anual.",
+                features: ["Todo el Catálogo", "Mentorías Grupales", "Soporte Prioritario", "Certificación Kaizen", "2 Meses Bonificados"],
+                cta: "Acceso Preferente",
+                highlight: true
+              },
+              {
+                tier: "Temporada Infinita",
+                price: "Consultar",
+                period: "/Mastery",
+                desc: "Acceso Vitalicio. El legado completo de Sistema Kaizen para siempre.",
+                features: ["Propiedad Intelectual", "Mentoría 1-a-1", "Soporte VIP 24/7", "Networking de Elite", "Acceso a Eventos Físicos"],
+                cta: "Aplicar Hoy",
+                highlight: false
+              }
+            ].map((plan, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -10 }}
+                className={`p-10 border ${plan.highlight ? 'border-gold bg-gold/5 ring-1 ring-gold/50' : 'border-white/10 bg-white/[0.02]'} flex flex-col`}
+              >
+                {plan.highlight && (
+                  <div className="bg-gold text-black text-[10px] font-bold uppercase tracking-widest py-1 px-4 self-start mb-6 rounded-full">
+                    Más Recomendado
+                  </div>
+                )}
+                <h3 className="font-display text-2xl mb-2">{plan.tier}</h3>
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-4xl font-tech font-bold">{plan.price}</span>
+                  <span className="text-white/30 text-sm">{plan.period}</span>
+                </div>
+                <p className="text-white/50 text-sm mb-8 leading-relaxed mb-auto italic">"{plan.desc}"</p>
+                
+                <ul className="space-y-4 mb-10">
+                  {plan.features.map((feat, fi) => (
+                    <li key={fi} className="flex items-center gap-3 text-xs uppercase tracking-widest text-white/70">
+                      <div className="w-1.5 h-1.5 bg-gold rounded-full" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+
+                <button className={`w-full py-4 font-bold uppercase tracking-[0.2em] text-xs transition-all ${
+                  plan.highlight 
+                  ? 'bg-gold text-black hover:bg-white' 
+                  : 'border border-white/20 text-white hover:border-gold hover:text-gold'
+                }`}>
+                  {plan.cta}
+                </button>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
