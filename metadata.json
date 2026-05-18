@@ -1,0 +1,8 @@
+{
+  "name": "Temporada Infinita - Sistema Kaizen",
+  "description": "El nivel más alto de Sistema Kaizen. Un ecosistema intelectual valorado en +$500k USD para visionarios que buscan dominio total en E-commerce, IA y Negocios Digitales.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
